@@ -1,0 +1,30 @@
+:root {
+  --base-color-text: #707070;
+  --base-color: #f0932b;
+  --secondary-color: #ffa23f;
+  --danger-color: #e74c3c;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--base-color-text);
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  &:visited {
+    color: var(--base-color-text);
+  }
+}

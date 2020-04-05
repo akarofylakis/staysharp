@@ -1,0 +1,38 @@
+.hero {
+  min-height: 700px;
+  background-image: url('../../assets/girl.jpg');
+  background-size: cover;
+  background-position: center 0px;
+  background-repeat: no-repeat;
+  position: relative;
+
+  .hero-container {
+    position: absolute;
+    right: 20%;
+    top: 60%;
+  }
+
+  h2 {
+    color: #fff;
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+
+  i {
+    margin-left: -12px;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a {
+    padding: 15px 40px;
+    font-size: 14px;
+    &:hover {
+      i {
+        margin-left: 5px;
+        opacity: 1;
+      }
+    }
+  }
+}

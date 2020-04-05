@@ -1,0 +1,22 @@
+.category {
+  min-height: 800px;
+  padding: 30px 0;
+  background-color: #f2f2f2;
+
+  .category-container {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .items-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  h2 {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+}

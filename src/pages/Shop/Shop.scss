@@ -1,0 +1,32 @@
+.shop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 0;
+  background-color: #f2f2f2;
+
+  h2 {
+    margin-bottom: 60px;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 32px;
+    font-weight: 200;
+  }
+
+  .shop__genders {
+    margin: 0 auto;
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+  }
+  .shop__categories {
+    margin: 0 auto;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
