@@ -1,9 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from '../../redux/user/user-actions';
 
 import './SignIn.scss';
 
@@ -13,28 +17,24 @@ class SignIn extends React.Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
     };
   }
 
-  submitHandler = async e => {
+  submitHandler = async (e) => {
     e.preventDefault();
+    const { emailSignInStart } = this.props;
     const { email, password } = this.state;
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: '', password: '' });
-    } catch (e) {
-      console.log(e);
-    }
+    emailSignInStart(email, password);
   };
 
-  changeHandler = e => {
+  changeHandler = (e) => {
     const { value, name } = e.target;
-
     this.setState({ [name]: value });
   };
 
   render() {
+    const { googleSignInStart } = this.props;
     return (
       <div className='sign-in'>
         <div className='sign-in-container'>
@@ -60,7 +60,7 @@ class SignIn extends React.Component {
               <Button primary type='submit'>
                 Log In
               </Button>
-              <Button onClick={signInWithGoogle} isGoogleSignIn>
+              <Button onClick={googleSignInStart} isGoogleSignIn>
                 <div className='btn-container'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -106,4 +106,10 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password })),
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);

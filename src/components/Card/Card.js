@@ -3,16 +3,19 @@ import { Link, withRouter } from 'react-router-dom';
 
 import './Card.scss';
 
-const Card = props => {
+const Card = (props) => {
   return (
     <div className={`card card--${props.size || 'small'}`}>
       <div
         className='card__image'
         style={{
-          backgroundImage: `url(${props.imageUrl})`
+          backgroundImage: `url(${props.imageUrl})`,
         }}
       ></div>
-      <Link to={`category/${props.linkUrl}`} className='card__content'>
+      <Link
+        to={`${props.match.path}/category/${props.linkUrl}`}
+        className='card__content'
+      >
         {props.children}
       </Link>
     </div>

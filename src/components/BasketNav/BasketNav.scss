@@ -1,6 +1,16 @@
 .basket-nav a:visited {
   color: var(--base-color-text);
 }
+.basket-nav--btn {
+  color: var(--base-color-text);
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 0.1s ease-in-out;
+  &:hover {
+    color: var(--base-color);
+  }
+}
 
 .item-count {
   margin-left: 4px;

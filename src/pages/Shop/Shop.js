@@ -1,39 +1,41 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
-import {
-  selectGenderCategory,
-  selectCategory
-} from '../../redux/category/category-selectors';
+import { fetchCollectionsStart } from '../../redux/shop/shop-actions';
 
-import Card from '../../components/Card/Card';
+import CategoryOverviewComponent from '../../pages/CategoryOverview/CategoryOverviewContainer';
+import CategoryComponent from '../../pages/Category/CategoryContainer';
 
 import './Shop.scss';
 
-const Shop = ({ categoriesGender, categories }) => (
-  <div className='shop'>
-    <h2>Select a Category</h2>
-    <div className='shop__genders'>
-      {categoriesGender.map(({ id, ...otherProps }) => (
-        <Card key={id} {...otherProps} size='large'>
-          {otherProps.title}
-        </Card>
-      ))}
-    </div>
-    <div className='shop__categories'>
-      {categories.map(({ id, ...otherProps }) => (
-        <Card key={id} {...otherProps}>
-          {otherProps.title}
-        </Card>
-      ))}
-    </div>
-  </div>
-);
+class Shop extends React.Component {
+  componentDidMount() {
+    const { fetchCollectionsStart } = this.props;
+    fetchCollectionsStart();
+  }
 
-const mapStateToProps = createStructuredSelector({
-  categoriesGender: selectGenderCategory,
-  categories: selectCategory
+  render() {
+    const { match } = this.props;
+
+    return (
+      <div className='shop'>
+        <Route
+          exact
+          path={`${match.path}`}
+          component={CategoryOverviewComponent}
+        />
+        <Route
+          path={`${match.path}/category/:categoryId`}
+          component={CategoryComponent}
+        />
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
-export default connect(mapStateToProps)(Shop);
+export default connect(null, mapDispatchToProps)(Shop);

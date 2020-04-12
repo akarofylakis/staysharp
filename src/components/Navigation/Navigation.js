@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentUser } from '../../redux/user/user-selectors';
-import { auth } from '../../firebase/firebase.utils';
+import { signOutStart } from '../../redux/user/user-actions';
+
 import CartDropdown from '../CartDropdown/CartDropdown';
 import BasketNav from '../BasketNav/BasketNav';
 
 import './Navigation.scss';
 
-const Navigation = ({ currentUser }) => {
+const Navigation = ({ currentUser, signOutStart }) => {
   return (
     <nav className='navbar'>
       <div className='navbar-container'>
@@ -33,7 +34,7 @@ const Navigation = ({ currentUser }) => {
         <ul className='navbar__right'>
           <li>
             {currentUser ? (
-              <a href='/' onClick={() => auth.signOut()}>
+              <a href='/' onClick={signOutStart}>
                 Sign Out
               </a>
             ) : (
@@ -52,4 +53,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(Navigation);
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
